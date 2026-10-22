@@ -36,7 +36,7 @@
 <script>
 const SUPABASE_URL="https://gcajxrcyitsslwulyvjr.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY="sb_publishable_s7TGFo4YRC6JqeQPnOVfhQ_JPlIPtxG";
-const ADMIN_URL=SUPABASE_URL+"/functions/v1/admin-management";
+const ADMIN_URL = SUPABASE_URL + "/functions/v1/admin-assignment";
 const $=id=>document.getElementById(id);let adminToken="";
 const admin=$("adminApp"),content=$("adminContent"),adminMsg=$("adminMessage");let students=[],scores=[],cutoffs=[];
 function showLogin(){$("loginView").classList.remove("hidden");$("studentResultsView").classList.add("hidden");$("studentCode").value="";$("birthdate").value="";$("message").textContent="";$("message").className="message";$("studentCode").focus()}
