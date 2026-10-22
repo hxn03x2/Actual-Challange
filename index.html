@@ -234,6 +234,26 @@ body{letter-spacing:-.025em;line-height:1.42;background:#f4f4f2}
 @media(max-width:900px){.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media(max-width:560px){.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:1fr;}}
 
+/* Final alignment pass: matching control geometry and restrained action buttons. */
+.admin-main #sf #scode::placeholder{font-family:inherit;font-size:12px;font-weight:400;letter-spacing:normal;}
+.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:14px;row-gap:0;}
+.admin-main #cf .grid2>.field,.admin-main #cutForm .grid2>.field{min-width:0;width:100%;}
+.admin-main #cf input[type="date"],.admin-main #cutForm input[type="date"]{width:100%!important;min-width:0!important;max-width:100%!important;height:39px!important;min-height:39px!important;max-height:39px!important;padding:8px 10px!important;box-sizing:border-box!important;font:13px/21px -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif!important;appearance:none;-webkit-appearance:none;}
+.admin-main #cf select,.admin-main #cutForm select{width:100%;min-width:0;max-width:100%;height:39px;min-height:39px;max-height:39px;box-sizing:border-box;}
+.admin-main .row-actions{display:flex;align-items:center;justify-content:center;gap:0;min-height:34px;}
+.admin-main #st td:last-child,.admin-main #ct td:last-child,.admin-main #cutTable td:last-child{vertical-align:middle;text-align:center;}
+.admin-main .row-actions .btn.danger.small,.admin-main #cutTable .btn.danger.small{display:inline-flex;align-items:center;justify-content:center;min-width:58px;height:34px;min-height:34px;padding:0 12px;border:1px solid #242422;border-radius:3px;background:#242422;color:#fff;font-size:12px;font-weight:600;line-height:1;text-decoration:none;box-shadow:none;transition:background-color .18s ease,border-color .18s ease,transform .12s ease;}
+.admin-main .row-actions .btn.danger.small:hover,.admin-main #cutTable .btn.danger.small:hover{background:#44433f;border-color:#44433f;color:#fff;}
+.admin-main .row-actions .btn.danger.small:active,.admin-main #cutTable .btn.danger.small:active{transform:translateY(1px);}
+.admin-main #cutTable td:last-child{width:90px;}
+.admin-main #bf .field-note{margin-bottom:3px;line-height:1.45;}
+.admin-main #bf .field-note+.field-note{margin-top:0;margin-bottom:4px;}
+.admin-main #bf #bdata{margin-top:4px;}
+.admin-main .admin-title>p.muted{margin-top:10px;}
+.welcome-panel{padding:20px 22px 18px;}
+.welcome-panel strong{line-height:1.5;}
+@media(max-width:900px){.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:12px;}}
+@media(max-width:560px){.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -314,24 +334,3 @@ function cutoffView(){content.innerHTML=`<div class="admin-title"><h2>등급 기
 function previewView(){content.innerHTML=`<div class="admin-title"><h2>학생 성적 조회</h2><p class="muted">개인식별코드를 선택해 해당 학생의 성적표를 조회할 수 있습니다.</p></div><div class="formbox"><div class="field"><label for="previewStudent">개인식별코드</label><select id="previewStudent"><option value="">개인식별코드 선택</option>${students.slice().sort((a,b)=>a.student_code.localeCompare(b.student_code)).map(st=>`<option value="${st.id}">${esc(st.student_code)}</option>`).join("")}</select></div><button class="btn primary" id="openPreview">성적표 조회</button></div><div id="previewArea"></div>`;$("openPreview").onclick=async()=>{const st=students.find(x=>String(x.id)===$("previewStudent").value);if(!st){say("학생을 선택해 주세요.","error");return}try{const r=await fetch(ADMIN_URL,{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify({action:"lookup_student",student_code:st.student_code,birthdate:st.birthdate})});const d=await r.json().catch(()=>({}));if(!r.ok)throw Error(d.error||"학생 성적표를 불러오지 못했습니다.");$("previewArea").innerHTML=`<div class="preview-frame"><div class="preview-label">학생 성적표 미리보기</div><header class="result-head"><div><div class="eyebrow">CHEONGUN HAKSA / ACTUAL CHALLENGE</div><h1>모의고사 성적표</h1><p class="muted">응시한 시험을 선택해 성적을 확인할 수 있습니다.</p></div></header><section class="exam-picker"><label for="previewExamSelect">시험 선택</label><select id="previewExamSelect"></select></section><div class="result-meta" id="previewMeta"></div><section class="result-summary" id="previewSummary"></section><section class="result-section"><div class="section-head"><h2>과목별 성적</h2></div><div id="previewScores"></div></section><section class="result-section"><div class="section-head"><h2>등급 기준 점수</h2></div><div id="previewCutoffs" class="cutoff-table-wrap"></div></section></div>`;renderReportData(d,st.student_code,{select:"previewExamSelect",meta:"previewMeta",summary:"previewSummary",scores:"previewScores",cutoffs:"previewCutoffs"});say("학생 성적표를 불러왔습니다.","success")}catch(e){say(e.message,"error")}}}
 function bulkView(){content.innerHTML=`<div class="admin-title"><h2>성적 일괄 등록</h2></div><form id="bf" class="formbox"><div class="field"><label for="bdata">성적 데이터</label><p class="field-note">입력 항목: 개인식별코드, 생년월일, 학년도, 시험 월, 응시 일자, 영역, 점수</p><p class="field-note">입력 예시: MXXXXX, YYYYMMDD, 2025, 3월, YYYY-MM-DD, 국어 영역, 100</p><textarea id="bdata" rows="7" required aria-label="성적 데이터"></textarea></div><div class="actions"><button class="btn primary">성적 일괄 등록</button></div></form><div id="bresult"></div>`;$("bf").onsubmit=async e=>{e.preventDefault();let lines=$("bdata").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean),records=[],invalid=0,duplicates=[];for(let i=0;i<lines.length;i++){let c=(lines[i].includes("\t")?lines[i].split("\t"):lines[i].split(",")).map(x=>x.trim().replace(/^"|"$/g,""));const examAliases={"3월":"3월 전국연합학력평가","5월":"5월 전국연합학력평가","6월":"6월 대학수학능력시험 모의평가","7월":"7월 전국연합학력평가","9월":"9월 대학수학능력시험 모의평가","10월":"10월 전국연합학력평가","11월":"11월 대학수학능력시험"};const examInput=(c[3]||"").replace(/\s+/g,"");const normalizedExam=examAliases[examInput]||c[3];if(i===0&&/student.?code|식별코드|개인식별코드/i.test(c[0]))continue;if(c.length<7||!/^[Mm][A-Za-z0-9]{5}$/.test(c[0]||"")||!/^[0-9]{8}$/.test(c[1]||"")||!/^202[56]$/.test(c[2]||"")||!examOptions.includes(normalizedExam)||!/^\d{4}-\d{2}-\d{2}$/.test(c[4]||"")||!areaOptions.includes(c[5])||!Number.isFinite(Number(c[6]))||Number(c[6])<0||Number(c[6])>100){invalid++;continue}const subject=composeSubject(c[2],normalizedExam,c[4],c[5]);const student=students.find(st=>st.student_code.toUpperCase()===c[0].toUpperCase());if(!student){duplicates.push({line:i+1,reason:`${c[0]} 학생이 등록되어 있지 않습니다.`});continue}const existing=scores.find(sc=>sc.student_id===student.id&&sc.subject===subject);if(existing)duplicates.push({line:i+1,reason:`${c[0]} / ${subject} 성적이 이미 등록되어 있습니다.`});records.push({student_code:c[0].toUpperCase(),birthdate:c[1],subject,score:Number(c[6])})}if(!records.length){say(`등록 가능한 데이터가 없습니다. 형식 오류 ${invalid}건`,"error");return}if(duplicates.length&&!confirm(`${duplicates.length}건의 중복 또는 확인 항목이 있습니다. 계속 진행할까요?\n\n${duplicates.slice(0,8).map(x=>`행 ${x.line}: ${x.reason}`).join("\n")}${duplicates.length>8?"\n외 추가 항목": ""}`))return;if(!confirm(`${records.length}건을 등록합니다. 형식 오류 ${invalid}건은 제외됩니다. 진행할까요?`))return;try{const d=await call("bulk_scores",{records});say(`성적 ${d.saved}건을 등록했습니다. 제외 ${d.skipped||0}건, 형식 오류 ${invalid}건`,"success");$("bresult").innerHTML=`<div class="notice">성적 ${d.saved}건 등록 완료. 제외 ${d.skipped||0}건, 형식 오류 ${invalid}건</div>`}catch(e){say(e.message,"error")}}}
 </script></body></html>
-
-/* Final alignment pass: matching control geometry and restrained action buttons. */
-.admin-main #sf #scode::placeholder{font-family:inherit;font-size:12px;font-weight:400;letter-spacing:normal;}
-.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:14px;row-gap:0;}
-.admin-main #cf .grid2>.field,.admin-main #cutForm .grid2>.field{min-width:0;width:100%;}
-.admin-main #cf input[type="date"],.admin-main #cutForm input[type="date"]{width:100%!important;min-width:0!important;max-width:100%!important;height:39px!important;min-height:39px!important;max-height:39px!important;padding:8px 10px!important;box-sizing:border-box!important;font:13px/21px -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif!important;appearance:none;-webkit-appearance:none;}
-.admin-main #cf select,.admin-main #cutForm select{width:100%;min-width:0;max-width:100%;height:39px;min-height:39px;max-height:39px;box-sizing:border-box;}
-.admin-main .row-actions{display:flex;align-items:center;justify-content:center;gap:0;min-height:34px;}
-.admin-main #st td:last-child,.admin-main #ct td:last-child,.admin-main #cutTable td:last-child{vertical-align:middle;text-align:center;}
-.admin-main .row-actions .btn.danger.small,.admin-main #cutTable .btn.danger.small{display:inline-flex;align-items:center;justify-content:center;min-width:58px;height:34px;min-height:34px;padding:0 12px;border:1px solid #242422;border-radius:3px;background:#242422;color:#fff;font-size:12px;font-weight:600;line-height:1;text-decoration:none;box-shadow:none;transition:background-color .18s ease,border-color .18s ease,transform .12s ease;}
-.admin-main .row-actions .btn.danger.small:hover,.admin-main #cutTable .btn.danger.small:hover{background:#44433f;border-color:#44433f;color:#fff;}
-.admin-main .row-actions .btn.danger.small:active,.admin-main #cutTable .btn.danger.small:active{transform:translateY(1px);}
-.admin-main #cutTable td:last-child{width:90px;}
-.admin-main #bf .field-note{margin-bottom:3px;line-height:1.45;}
-.admin-main #bf .field-note+.field-note{margin-top:0;margin-bottom:4px;}
-.admin-main #bf #bdata{margin-top:4px;}
-.admin-main .admin-title>p.muted{margin-top:10px;}
-.welcome-panel{padding:20px 22px 18px;}
-.welcome-panel strong{line-height:1.5;}
-@media(max-width:900px){.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:12px;}}
-@media(max-width:560px){.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:1fr;}}
