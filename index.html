@@ -35,7 +35,7 @@
 <div id="adminApp" class="admin hidden"><div class="admin-wrap"><header class="admin-head"><div><div class="eyebrow">CHEONGUN HAKSA · ADMIN</div><h1>성적 관리 센터</h1></div><div class="actions"><button class="btn quiet" id="backStudent">학생 화면</button><button class="btn danger" id="logout">로그아웃</button></div></header><div class="admin-grid"><nav class="card nav"><button class="active" data-view="dashboard">대시보드</button><button data-view="students">학생 관리</button><button data-view="scores">성적 관리</button><button data-view="bulk">일괄 입력</button><button data-view="cutoffs">등급 컷</button></nav><main class="card admin-main"><div id="adminContent"></div><p id="adminMessage" class="admin-msg" role="status"></p></main></div></div></div>
 <script>
 const SUPABASE_URL="https://gcajxrcyitsslwulyvjr.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY="PASTE_YOUR_EXISTING_SUPABASE_PUBLISHABLE_KEY_HERE";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_s7TGFo4YRC6JqeQPnOVfhQ_JPlIPtxG";
 const ADMIN_URL=SUPABASE_URL+"/functions/v1/admin-management";
 const $=id=>document.getElementById(id);let adminToken="";
 const admin=$("adminApp"),content=$("adminContent"),adminMsg=$("adminMessage");let students=[],scores=[],cutoffs=[];
