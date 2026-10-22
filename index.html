@@ -55,7 +55,21 @@ $("lookupForm").addEventListener("submit",async e=>{
    const r=await fetch(ADMIN_URL,{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify({action:"admin_login",admin_code:code,birthdate:birth})});
    const d=await r.json().catch(()=>({}));if(r.status===429)throw Error(d.error||"인증 시도가 많습니다. 잠시 후 다시 시도해 주세요.");if(!r.ok||!d.token)throw Error(d.error||"식별코드 또는 생년월일이 올바르지 않습니다.");
    adminToken=d.token;$("studentApp").classList.add("hidden");admin.classList.remove("hidden");await render("dashboard");
- }catch(err){msg.textContent=err.message||"확인에 실패했습니다. 잠시 후 다시 시도해 주세요.";msg.classList.add("error");}
+ 
+} catch (err) {
+  console.error("[성적 조회 오류]", err);
+
+  if (err instanceof TypeError) {
+    msg.textContent =
+      "서버 연결에 실패했습니다. 네트워크, CORS 설정, 함수 URL을 확인해 주세요.";
+  } else {
+    msg.textContent =
+      err.message || "확인에 실패했습니다. 잠시 후 다시 시도해 주세요.";
+  }
+
+  msg.classList.add("error");
+}
+
  finally{$("lookupButton").disabled=false;}
 });
 function renderStudentResults(data){
