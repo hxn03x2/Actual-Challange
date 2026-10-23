@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5f7fb">
+<title>모의고사 성적 조회 | 청운학사</title>
+<style>
+:root{--bg:#fff;--ink:#111;--muted:#666;--line:#dedede;--soft:#f5f5f5;--danger:#111;--focus:#111}*{box-sizing:border-box}html{background:#fff}body{margin:0;min-height:100vh;background:#fff;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:15px;line-height:1.5;letter-spacing:-.015em}button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:wait}.hidden{display:none!important}.shell{width:100%;min-height:100svh;margin:0;padding:32px 22px 56px;display:flex;flex-direction:column;align-items:center;justify-content:center}.login{width:min(100%,380px);margin:auto}.login-kicker{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin:0 0 24px}.login h1{font-size:29px;line-height:1.2;letter-spacing:-.055em;font-weight:750;margin:0 0 9px}.login-intro{font-size:13px;color:var(--muted);margin:0 0 32px}.field{margin:0 0 19px}.field label{display:block;font-size:12px;font-weight:650;margin-bottom:8px}.field input,.field select,.field textarea,.search input{display:block;width:100%;min-width:0;min-height:49px;border:1px solid #bdbdbd;border-radius:0;background:#fff;padding:12px 13px;outline:none;box-shadow:none}.field input:focus,.field select:focus,.field textarea:focus,.search input:focus{border-color:#111;outline:1px solid #111;outline-offset:-1px}.field input::placeholder,.search input::placeholder{color:#999}.btn{border:1px solid #111;border-radius:0;min-height:43px;padding:10px 14px;background:#fff;color:#111;font-size:13px;font-weight:650;transition:background .15s,color .15s}.btn:hover{background:#f2f2f2}.btn.primary{background:#111;color:#fff}.btn.primary:hover{background:#333}.btn.danger{background:#fff;color:#111;border-color:#999}.btn.small{min-height:32px;padding:6px 9px;font-size:12px}.lookup-btn{width:100%;min-height:51px;margin-top:4px}.message{min-height:20px;margin:13px 0 0;font-size:12px;color:var(--muted)}.error{color:#111!important;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}.success{color:#111!important}.login-foot{margin-top:26px;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:#777;display:flex;justify-content:space-between;gap:12px}.result-view{width:min(100%,900px);margin:0 auto;align-self:stretch}.result-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;padding-bottom:23px;border-bottom:1px solid #111}.result-head h1{font-size:28px;line-height:1.2;letter-spacing:-.05em;margin:5px 0 7px}.eyebrow{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#666}.muted{font-size:12px;color:var(--muted);line-height:1.6;margin:0}.result-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:1px solid var(--line);margin-bottom:30px}.summary-item{padding:19px 18px 20px 0;border-right:1px solid var(--line)}.summary-item+.summary-item{padding-left:18px}.summary-item:last-child{border-right:0}.summary-label{font-size:11px;color:#666;margin-bottom:8px}.summary-value{font-size:27px;font-weight:750;letter-spacing:-.05em;line-height:1.1}.summary-unit{font-size:12px;font-weight:500;margin-left:4px}.result-section{margin:28px 0 0}.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:13px}.section-head h2{font-size:16px;letter-spacing:-.03em;margin:0;font-weight:750}.score-table-wrap{overflow:auto;border-top:1px solid #111}.score-table{border-collapse:collapse;width:100%;font-size:13px}.score-table th,.score-table td{padding:13px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}.score-table th{font-size:11px;color:#555;font-weight:650;background:#fff}.score-table td:first-child{font-weight:650}.cutoff-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid #111}.cutoff-item{padding:14px 14px 14px 0;border-bottom:1px solid var(--line)}.cutoff-item:nth-child(3n+2),.cutoff-item:nth-child(3n+3){padding-left:14px;border-left:1px solid var(--line)}.cutoff-title{font-size:12px;font-weight:700;margin-bottom:7px}.cutoff-line{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:#555;padding:3px 0}.cutoff-line strong{font-size:11px;color:#111}.result-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:34px;padding-top:16px;border-top:1px solid #111}.empty{padding:22px 0;font-size:13px;color:#666}.admin{position:fixed;inset:0;z-index:30;overflow:auto;background:#fff}.admin-wrap{max-width:1160px;margin:auto;padding:24px 26px 48px}.admin-head{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:19px;border-bottom:1px solid #111;margin-bottom:22px}.admin-head h1{font-size:22px;letter-spacing:-.045em;margin:4px 0 0}.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.admin-grid{display:grid;grid-template-columns:180px minmax(0,1fr);gap:30px}.nav{height:max-content;position:sticky;top:20px;display:flex;flex-direction:column;border-top:1px solid #111}.nav button{display:block;width:100%;text-align:left;background:#fff;border:0;border-bottom:1px solid var(--line);padding:12px 10px;font-size:13px;font-weight:600}.nav button.active{background:#111;color:#fff}.admin-main{min-width:0}.admin-main h2{font-size:20px;letter-spacing:-.04em;margin:0 0 5px}.admin-title{margin-bottom:20px}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #111;border-bottom:1px solid var(--line);margin:20px 0 26px}.stat{padding:16px 16px 18px 0;border-right:1px solid var(--line)}.stat+.stat{padding-left:16px}.stat:last-child{border-right:0}.stat span{font-size:11px;color:#666}.stat strong{display:block;font-size:27px;line-height:1.2;margin-top:7px;font-weight:750;letter-spacing:-.04em}.formbox{border-top:1px solid #111;border-bottom:1px solid var(--line);padding:18px 0;margin:20px 0}.formbox h3{font-size:14px;margin:0 0 12px}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}.row-actions{display:flex;gap:5px}.tablewrap{overflow:auto;border-top:1px solid #111}.table{border-collapse:collapse;width:100%;min-width:500px;font-size:12px}.table th,.table td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}.table th{font-size:11px;font-weight:650;color:#555;background:#fff}.search{display:flex;gap:8px;margin:14px 0}.search input{flex:1}.notice{border-left:2px solid #111;padding:10px 13px;margin:16px 0;font-size:12px;line-height:1.7;color:#444;background:#fafafa}.admin-msg{font-size:12px;color:#555;line-height:1.6;margin-top:13px}.empty{text-align:center;padding:25px 12px;color:#666;font-size:13px}.error-text{color:#111;text-decoration:underline}.cutoff-row{display:grid;grid-template-columns:1.5fr .7fr .8fr auto;gap:8px;align-items:end}.cutoff-row .field{margin:0}.cutoff-row .field input{min-height:42px}.admin-footer{font-size:11px;color:#777;margin-top:30px;padding-top:13px;border-top:1px solid var(--line)}
+@media(max-width:720px){.shell{padding:24px 20px}.login{max-width:360px}.result-view{width:100%}.result-head h1{font-size:24px}.result-summary{grid-template-columns:repeat(3,minmax(0,1fr))}.summary-item{padding:15px 10px 16px 0}.summary-item+.summary-item{padding-left:10px}.summary-value{font-size:23px}.cutoff-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cutoff-item:nth-child(3n+2),.cutoff-item:nth-child(3n+3){padding-left:0;border-left:0}.cutoff-item:nth-child(even){padding-left:12px;border-left:1px solid var(--line)}.admin-wrap{padding:16px 15px 34px}.admin-grid{grid-template-columns:1fr;gap:18px}.nav{position:static;flex-direction:row;overflow-x:auto;border-bottom:1px solid #111;border-top:0}.nav button{width:auto;white-space:nowrap;flex:0 0 auto;border-top:1px solid #111;border-bottom:0}.admin-main{padding:0}.admin-head h1{font-size:19px}.stats{margin-top:15px}.stat{padding:13px 10px 14px 0}.stat+.stat{padding-left:10px}.stat strong{font-size:23px}}
+@media(max-width:430px){.login h1{font-size:27px}.login-intro{margin-bottom:27px}.result-head{align-items:flex-start}.result-head h1{font-size:22px}.result-summary{margin-bottom:24px}.summary-label{font-size:10px}.summary-value{font-size:20px}.summary-item{padding-right:7px}.summary-item+.summary-item{padding-left:7px}.score-table th,.score-table td{padding:11px 9px}.cutoff-grid{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.cutoff-row{grid-template-columns:1fr 1fr}.cutoff-row .btn{grid-column:1/-1}.admin-head{align-items:flex-start;flex-direction:column}.result-actions{align-items:flex-start}}
+
+/* Refined monochrome administration UI */
+:root{--bg:#f7f7f5;--ink:#20201f;--muted:#777773;--line:#e5e4e0;--soft:#f1f0ed;--danger:#20201f;--focus:#20201f}
+body{color:#20201f;background:#f7f7f5;letter-spacing:-.02em}
+.admin{background:#f7f7f5}
+.admin-wrap{max-width:1280px;padding:34px 38px 56px}
+.admin-head{border-bottom:1px solid #deddd8;padding-bottom:25px;margin-bottom:30px}
+.admin-head .eyebrow{color:#85847f;letter-spacing:.18em;font-size:9px}
+.admin-head h1{font-size:25px;font-weight:650;letter-spacing:-.055em;margin-top:7px}
+.admin-grid{grid-template-columns:205px minmax(0,1fr);gap:54px}
+.nav{border-top:0;gap:3px;background:transparent}
+.nav button{border:0;border-radius:7px;padding:12px 14px;background:transparent;color:#686762;font-size:13px;font-weight:550;transition:background .15s,color .15s}
+.nav button:hover{background:#eeede9;color:#242422}
+.nav button.active{background:#242422;color:#fff;font-weight:600}
+.admin-main{min-width:0;padding:2px 0 0}
+.admin-main h2{font-size:23px;font-weight:650;letter-spacing:-.055em;margin-bottom:7px}
+.admin-title{margin-bottom:28px}
+.admin-title .muted{font-size:12px;color:#85847f}
+.stats{margin:0 0 34px;border:1px solid #e5e4e0;border-radius:10px;background:#fff;overflow:hidden}
+.stat{padding:23px 25px 25px;border-right:1px solid #eeede9}
+.stat+.stat{padding-left:25px}
+.stat span{font-size:11px;letter-spacing:.01em;color:#85847f}
+.stat strong{font-size:32px;font-weight:600;letter-spacing:-.06em;margin-top:12px}
+.formbox{border-top:1px solid #deddd8;border-bottom:1px solid #e5e4e0;padding:24px 0;margin:26px 0}
+.formbox h3{font-size:14px;font-weight:650;letter-spacing:-.025em;margin-bottom:18px}
+.field label{font-size:12px;color:#555550;font-weight:600}
+.field input,.field select,.field textarea,.search input{border-color:#deddd8;border-radius:6px;background:#fff;min-height:45px;padding:11px 13px;transition:border-color .15s,box-shadow .15s}
+.field input:focus,.field select:focus,.field textarea:focus,.search input:focus{border-color:#777670;outline:0;box-shadow:0 0 0 3px rgba(30,30,28,.055)}
+.btn{border-radius:6px;border-color:#d8d7d2;min-height:39px;padding:9px 14px;font-weight:600;background:#fff;transition:all .15s}
+.btn:hover{background:#f0efec;border-color:#c9c8c2}
+.btn.primary{background:#242422;border-color:#242422;color:#fff}
+.btn.primary:hover{background:#44433f}
+.btn.danger{border-color:#deddd8;color:#555550}
+.btn.small{border-radius:5px;min-height:31px}
+.tablewrap{border-top:1px solid #deddd8;border-radius:7px 7px 0 0}
+.table{font-size:12px}
+.table th,.table td{padding:14px 12px;border-bottom-color:#eeede9}
+.table th{color:#85847f;background:#fbfbfa;font-weight:600}
+.table td{color:#3d3d39}
+.search{margin:18px 0 13px}
+.notice{background:#f0efec;border-left:2px solid #bdbcb5;border-radius:0 5px 5px 0;color:#66655f}
+.admin-msg{margin-top:15px;color:#777773}
+.empty{color:#85847f}
+@media(max-width:720px){.admin-wrap{padding:22px 18px 36px}.admin-head{padding-bottom:20px;margin-bottom:22px}.admin-grid{grid-template-columns:minmax(0,1fr);gap:22px}.nav{gap:4px}.nav button{padding:10px 12px}.admin-main h2{font-size:21px}.stats{margin-bottom:26px}.stat{padding:17px 13px 18px 14px}.stat+.stat{padding-left:14px}.stat strong{font-size:27px;margin-top:9px}}
+
+ .login-kicker,.login-foot{display:none!important}
+
+/* Compact, architectural monochrome system */
+body{letter-spacing:-.025em;line-height:1.42;background:#f4f4f2}
+.admin{background:#f4f4f2}
+.admin-wrap{max-width:1240px;padding:26px 30px 40px}
+.admin-head{border-bottom:2px solid #242422;padding-bottom:17px;margin-bottom:22px;align-items:center}
+.admin-head h1{font-size:23px;letter-spacing:-.06em;font-weight:720;margin-top:4px}
+.admin-grid{grid-template-columns:188px minmax(0,1fr);gap:34px}
+.nav{gap:0}
+.nav button{border-radius:0;border-bottom:1px solid #deded9;padding:10px 12px;letter-spacing:-.025em}
+.nav button.active{box-shadow:inset 3px 0 0 #bdbbb3;background:#242422}
+.admin-main h2{font-size:22px;letter-spacing:-.06em;margin-bottom:0}
+.admin-title{margin-bottom:18px}
+.field{margin-bottom:13px}
+.field label{margin-bottom:6px;font-size:12px}
+.field input,.field select,.field textarea,.search input{min-height:42px;padding:9px 10px;border-color:#c9c8c2}
+.btn{min-height:37px;padding:8px 12px;font-size:12px}
+.formbox{padding:15px 0;margin:16px 0}
+.formbox h3{margin-bottom:10px}
+.grid2{gap:0 12px}
+.table th,.table td{padding:9px 9px}
+.table{font-size:12px}
+.search{margin:11px 0}
+.admin-msg{margin-top:8px}
+.field-note{font-size:11px;color:#6e6e68;margin:7px 0 0;line-height:1.4}
+.overview-list{border-top:2px solid #252523}
+.overview-list button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:16px 2px;border:0;border-bottom:1px solid #d8d7d1;background:transparent;text-align:left;font-size:14px;font-weight:650}
+.overview-list button span:last-child{font-size:12px;font-weight:500;color:#66665f}
+.overview-list b{display:inline-block;margin-left:10px;color:#222}
+.preview-modal{position:fixed;inset:0;z-index:100;background:rgba(20,20,18,.45);display:grid;place-items:center;padding:18px}
+.preview-modal.hidden{display:none!important}
+.preview-dialog{width:min(100%,440px);background:#f8f8f6;border:1px solid #242422;padding:22px;box-shadow:8px 8px 0 rgba(0,0,0,.12)}
+.preview-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:13px;border-bottom:2px solid #242422}
+.preview-top h2{font-size:18px;margin:0;letter-spacing:-.05em}
+.preview-dialog label{display:block;font-size:12px;font-weight:700;margin-bottom:7px}
+.preview-dialog select{width:100%;min-height:42px;border:1px solid #aaa;background:white;padding:9px;margin-bottom:12px}
+.preview-dialog>.btn.primary{width:100%}
+@media(max-width:720px){.admin-wrap{padding:16px 14px 28px}.admin-grid{grid-template-columns:1fr;gap:15px}.admin-head{align-items:center}.admin-head h1{font-size:20px}.admin-head .btn{white-space:nowrap}.nav button{padding:10px 11px}.formbox{margin:13px 0}.overview-list button{padding:14px 2px}}
+
+/* Final polish: compact rhythm, restrained radius, consistent fields */
+.login{width:min(100%,400px)}
+.login-kicker{display:block!important;font-size:10px;letter-spacing:.12em;margin:0 0 20px;color:#777;font-weight:750}
+.login-kicker span{padding:0 4px;color:#222}
+.login h1{font-size:30px;letter-spacing:-.065em;margin-bottom:7px}
+.login-intro{margin-bottom:20px;line-height:1.45}
+.login .field{margin-bottom:12px}
+.login .field label{margin-bottom:5px}
+.login .field input{min-height:44px;border-radius:3px}
+.login .lookup-btn{border-radius:3px;margin-top:2px;min-height:45px}
+.login .message{margin-top:9px;min-height:18px}
+.loading-dots{display:inline-flex;margin-left:1px;gap:0;overflow:hidden;vertical-align:baseline}
+.loading-dots i{font-style:normal;animation:dotCycle 1.2s infinite;opacity:0}
+.loading-dots i:nth-child(2){animation-delay:.2s}.loading-dots i:nth-child(3){animation-delay:.4s}
+@keyframes dotCycle{0%,15%{opacity:0}35%,75%{opacity:1}100%{opacity:0}}
+.field input,.field select,.field textarea,.search input,.preview-dialog select{border-radius:3px!important}
+.btn,.nav button{border-radius:3px!important}
+.nav button{border-radius:0!important}
+.admin-grid{gap:27px}
+.admin-main{background:#fbfbf9;border:1px solid #e3e2dc;padding:23px 24px;min-height:70vh}
+.formbox{padding:14px 0;margin:12px 0 17px}
+.grid2{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px;align-items:start}
+.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid2 .field{min-width:0}
+.grid2 .field label{margin-bottom:5px}
+.table{min-width:0}
+.table td:last-child{width:1%;}
+.row-actions .btn{white-space:nowrap}
+.field-note{margin-top:5px}
+@media(max-width:900px){.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.admin-main{padding:16px 13px;min-height:auto}.admin-grid{gap:13px}.login h1{font-size:28px}}
+
+/* Editorial refinement: restrained typography, compact controls and quiet motion */
+.login-kicker{font-family:Inter,"Helvetica Neue",Arial,sans-serif;font-size:10px;font-weight:750;letter-spacing:.105em;margin-bottom:12px;color:#62625d}
+.login-kicker span{padding:0 2px;color:#a09f99}
+.login h1{margin-bottom:6px;font-size:28px;letter-spacing:-.06em}
+.login-intro{margin-bottom:22px}
+.login .field{margin-bottom:13px}
+.login .field label{margin-bottom:5px}
+.login .field input{min-height:43px;padding:10px 12px}
+.login .lookup-btn{min-height:45px;margin-top:3px}
+.loading-dots{display:inline-flex;margin-left:2px;gap:1px}
+.loading-dots i{font-style:normal;opacity:.25;animation:dotPulse 1.05s infinite ease-in-out}
+.loading-dots i:nth-child(2){animation-delay:.18s}.loading-dots i:nth-child(3){animation-delay:.36s}
+@keyframes dotPulse{0%,70%,100%{opacity:.22;transform:translateY(0)}35%{opacity:1;transform:translateY(-1px)}}
+.admin-grid{gap:34px}
+.nav button{border-radius:3px;padding:10px 12px}
+.nav .nav-logout{margin-top:12px;border-top:1px solid var(--line);color:#777}
+.btn,.field input,.field select,.field textarea,.search input{border-radius:3px;transition:border-color .16s ease,background-color .16s ease,color .16s ease,transform .16s ease}
+.btn:active{transform:translateY(1px)}
+.field input,.field select,.field textarea,.search input{min-height:39px;padding:8px 10px}
+.field label{margin-bottom:5px}
+.field{margin-bottom:12px}
+.formbox{padding:15px 0;margin:16px 0}
+.grid2{gap:0 10px}
+.table th,.table td{padding:10px 9px}
+.admin-msg{min-height:0;max-height:0;overflow:hidden;opacity:0;transform:translateY(4px);transition:opacity .2s ease,transform .2s ease,max-height .2s ease,margin .2s ease;padding:0;margin:0}
+.admin-msg.show{opacity:1;transform:translateY(0);max-height:70px;margin-top:10px;padding:8px 10px;background:#efeee9;border-left:2px solid #333}
+.admin-msg.error{background:#f4eeee;border-left-color:#8b3535;text-decoration:none}
+.admin-msg.success{background:#edf2ed;border-left-color:#45674a}
+.field-note{font-size:12px;color:#686862;line-height:1.55;margin:0 0 9px}
+.exam-picker{display:flex;align-items:center;gap:14px;padding:17px 0 20px;border-bottom:1px solid var(--line)}
+.exam-picker label{font-size:12px;font-weight:700;white-space:nowrap}
+.exam-picker select{min-width:230px;max-width:100%;min-height:38px;padding:7px 10px;border:1px solid #bdbdbd;border-radius:3px;background:#fff;font:inherit;font-size:13px}
+.field input[type="date"]{display:block;width:100%;min-width:0;max-width:100%;height:39px;min-height:39px;padding:8px 10px;font:inherit;font-size:13px;box-sizing:border-box;color:var(--ink);background:#fff;border:1px solid #c9c8c1;border-radius:3px}
+.report-score-table th,.report-score-table td{white-space:nowrap}
+.result-summary{grid-template-columns:minmax(180px,260px);margin-bottom:14px}
+#studentLogout{align-self:flex-start}
+.report-score-wrap{border-top:1px solid #222}
+.result-head{align-items:center;padding-bottom:18px;gap:14px}
+.result-head h1{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;margin:4px 0 5px;font-size:26px;letter-spacing:-.06em}
+.result-head .eyebrow{font-family:Inter,"Helvetica Neue",Arial,sans-serif;font-size:9px;letter-spacing:.1em}
+.result-head .muted{margin-top:0}
+#studentLogout{background:transparent;border:0;padding:7px 0;color:#666;font-size:12px;font-weight:500;text-decoration:underline;text-decoration-color:#c7c6c0;text-underline-offset:4px;box-shadow:none}
+#studentLogout:hover{color:#222;background:transparent;text-decoration-color:#555}
+#studentLogout:active{transform:none}
+.result-summary{grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:23px}
+.summary-item{padding-top:14px;padding-bottom:15px}
+.summary-value{font-size:23px;font-weight:650;letter-spacing:-.035em}
+.summary-rank{font-size:16px;letter-spacing:-.02em}
+.result-section{margin-top:23px}
+.section-head{margin-bottom:9px}
+.score-table{font-size:12px}
+.score-table th,.score-table td{padding:10px 11px}
+.score-table td:first-child{font-weight:550}
+.cutoff-table-wrap{overflow:auto;border-top:1px solid #222}
+.cutoff-table{border-top:0}
+.preview-frame{margin-top:16px;border:1px solid var(--line);padding:16px;background:#fff}
+.preview-label{font-size:11px;font-weight:700;color:#777;margin-bottom:12px}
+@media(max-width:720px){.admin-grid{gap:13px}.exam-picker{align-items:flex-start;flex-direction:column;gap:7px}.exam-picker select{width:100%;min-width:0}.result-head{align-items:flex-start;flex-direction:column}.result-head .actions{width:100%}.result-head .actions .btn{flex:1}.login-kicker{margin-bottom:10px}}
+.loading-line{display:flex;align-items:center;gap:4px;padding:14px 0;color:#777;font-size:12px}.loading-line i{width:3px;height:3px;border-radius:50%;background:#777;animation:dotPulse 1s infinite}.loading-line i:nth-child(3){animation-delay:.16s}.loading-line i:nth-child(4){animation-delay:.32s}
+
+/* Student report: compact subject cards and side-by-side grade thresholds */
+.subject-grid{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid #222}
+.subject-card{min-width:0;padding:15px 0 14px;border-bottom:1px solid var(--line)}
+.subject-card-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:11px}
+.subject-card-title{font-size:14px;font-weight:700;letter-spacing:-.035em;min-width:0;overflow-wrap:anywhere}
+.subject-card-grade{font-size:12px;font-weight:650;white-space:nowrap;color:#555}
+.subject-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.subject-metric{min-width:0}
+.subject-metric-label{font-size:10px;color:#777;margin-bottom:4px}
+.subject-metric-value{font-size:14px;font-weight:650;letter-spacing:-.025em;white-space:nowrap}
+.subject-metric-value small{font-size:10px;font-weight:500;color:#777;margin-left:2px}
+.cutoff-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+.cutoff-item{padding:13px 0;border-bottom:1px solid var(--line)}
+.cutoff-item:nth-child(3n+2),.cutoff-item:nth-child(3n+3){padding-left:0;border-left:0}
+.cutoff-item:nth-child(even){padding-left:16px;border-left:1px solid var(--line)}
+.cutoff-title{font-size:13px;margin-bottom:6px}
+.cutoff-line{font-size:12px;padding:4px 0}
+.cutoff-line strong{font-size:12px}
+@media(max-width:560px){.subject-grid,.cutoff-grid{grid-template-columns:1fr}.cutoff-item:nth-child(even){padding-left:0;border-left:0}.subject-card{padding:13px 0}.subject-card-title{font-size:13px}.subject-metric-value{font-size:13px}.result-head .actions{width:auto!important}.result-head .actions .btn{flex:0 0 auto}}
+.result-meta{display:flex;gap:12px;margin:0 0 22px;border-bottom:1px solid var(--line)}.result-meta>div{flex:1;min-width:0;padding:12px 14px 13px 0}.result-meta>div+div{padding-left:14px;border-left:1px solid var(--line)}.result-meta span{display:block;color:#777;font-size:10px;margin-bottom:5px}.result-meta strong{display:block;font-size:14px;font-weight:650;letter-spacing:-.025em;overflow-wrap:anywhere}.logout-overlay{position:fixed;inset:0;z-index:100;background:rgba(247,247,245,.88);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(3px)}.logout-panel{width:min(300px,calc(100% - 40px));padding:24px;background:#fff;border:1px solid var(--line);text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.06)}.logout-panel strong{display:block;font-size:15px;font-weight:650}.logout-panel span{display:block;font-size:12px;color:#777;margin-top:7px}.logout-spinner{width:22px;height:22px;border:2px solid #e3e2de;border-top-color:#242422;border-radius:50%;margin:0 auto 13px;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}@media(max-width:560px){.result-meta{gap:8px}.result-meta>div{padding-right:8px}.result-meta>div+div{padding-left:8px}}
+/* Student logout mirrors the administrator button, with a restrained hover transition. */
+#studentLogout{align-self:flex-start;background:#242422;border:1px solid #242422;border-radius:3px;padding:8px 12px;min-height:37px;color:#fff;font-size:12px;font-weight:600;text-decoration:none;box-shadow:none;transition:background-color .18s ease,border-color .18s ease,transform .12s ease}
+#studentLogout:hover{background:#44433f;border-color:#44433f;color:#fff;text-decoration:none}
+#studentLogout:active{transform:translateY(1px)}
+
+/* Consistent form sizing and measured administrative typography */
+.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;}
+.admin-main #cf .field input[type="date"],.admin-main #cutForm .field input[type="date"]{display:block;width:100%;min-width:0;max-width:100%;height:39px;min-height:39px;max-height:39px;padding:8px 10px;font-family:inherit;font-size:13px;line-height:21px;box-sizing:border-box;appearance:none;-webkit-appearance:none;}
+.admin-main #cf .field,.admin-main #cutForm .field{min-width:0;width:100%;} .admin-main #cf .grid2>.field,.admin-main #cutForm .grid2>.field{min-width:0;max-width:100%;}
+.admin-main #cf .field select,.admin-main #cutForm .field select{display:block;width:100%;min-width:0;max-width:100%;height:39px;min-height:39px;max-height:39px;padding:8px 10px;font-size:13px;box-sizing:border-box;}
+.admin-main #sf #scode,.admin-main #sf #sbirth{font-size:14px;letter-spacing:.015em;}
+.admin-main #sf #scode{font-weight:500;font-family:inherit;}
+.admin-main #sf #sbirth{font-weight:500;}
+.admin-main #st .student-identity,.admin-main #st .student-birthdate{font-size:13px;letter-spacing:.01em;}
+.admin-main #st .student-identity{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:500;}
+.admin-main #st .student-birthdate{font-weight:500;}
+.admin-main .record-code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;font-weight:500;letter-spacing:.01em;}
+.admin-main .record-exam{font-size:13px;line-height:1.55;}
+.admin-main #cutTable .record-exam{font-size:13px;}
+.admin-main #bf .field-note{margin:0;line-height:1.5;}
+.admin-main #bf .field-note+.field-note{margin-top:3px;}
+.welcome-overlay{position:fixed;inset:0;z-index:110;background:rgba(247,247,245,.72);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(2px);animation:welcomeFade .18s ease-out;}
+.welcome-panel{width:min(320px,calc(100% - 40px));padding:21px 22px 19px;background:#fff;border:1px solid #e3e2dc;text-align:center;box-shadow:0 10px 32px rgba(0,0,0,.05);animation:welcomeRise .22s ease-out;}
+.welcome-mark{display:flex;width:24px;height:24px;align-items:center;justify-content:center;margin:0 auto 10px;border-radius:50%;background:#eeeee9;color:#333;font-size:13px;}
+.welcome-panel strong{display:block;font-size:14px;font-weight:650;letter-spacing:-.025em;}
+.welcome-panel>span:last-child{display:block;margin-top:5px;font-size:11px;color:#777;}
+@keyframes welcomeFade{from{opacity:0}to{opacity:1}}@keyframes welcomeRise{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:560px){.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:1fr;}}
+
+/* Final alignment pass: matching control geometry and restrained action buttons. */
+.admin-main #sf #scode::placeholder{font-family:inherit;font-size:12px;font-weight:400;letter-spacing:normal;}
+.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:14px;row-gap:0;}
+.admin-main #cf .grid2>.field,.admin-main #cutForm .grid2>.field{min-width:0;width:100%;}
+.admin-main #cf input[type="date"],.admin-main #cutForm input[type="date"]{width:100%!important;min-width:0!important;max-width:100%!important;height:39px!important;min-height:39px!important;max-height:39px!important;padding:8px 10px!important;box-sizing:border-box!important;font:13px/21px -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif!important;appearance:none;-webkit-appearance:none;}
+.admin-main #cf select,.admin-main #cutForm select{width:100%;min-width:0;max-width:100%;height:39px;min-height:39px;max-height:39px;box-sizing:border-box;}
+.admin-main .row-actions{display:flex;align-items:center;justify-content:center;gap:0;min-height:34px;}
+.admin-main #st td:last-child,.admin-main #ct td:last-child,.admin-main #cutTable td:last-child{vertical-align:middle;text-align:center;}
+.admin-main .row-actions .btn.danger.small,.admin-main #cutTable .btn.danger.small{display:inline-flex;align-items:center;justify-content:center;min-width:58px;height:34px;min-height:34px;padding:0 12px;border:1px solid #242422;border-radius:3px;background:#242422;color:#fff;font-size:12px;font-weight:600;line-height:1;text-decoration:none;box-shadow:none;transition:background-color .18s ease,border-color .18s ease,transform .12s ease;}
+.admin-main .row-actions .btn.danger.small:hover,.admin-main #cutTable .btn.danger.small:hover{background:#44433f;border-color:#44433f;color:#fff;}
+.admin-main .row-actions .btn.danger.small:active,.admin-main #cutTable .btn.danger.small:active{transform:translateY(1px);}
+.admin-main #cutTable td:last-child{width:90px;}
+.admin-main #bf .field-note{margin-bottom:3px;line-height:1.45;}
+.admin-main #bf .field-note+.field-note{margin-top:0;margin-bottom:4px;}
+.admin-main #bf #bdata{margin-top:4px;}
+.admin-main .admin-title>p.muted{margin-top:10px;}
+.welcome-panel{padding:20px 22px 18px;}
+.welcome-panel strong{line-height:1.5;}
+@media(max-width:900px){.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:12px;}}
+@media(max-width:560px){.admin-main #cf .grid2,.admin-main #cutForm .grid2{grid-template-columns:1fr;}}
+
+/* Admin welcome toast: restrained, non-blocking and lightweight. */
+.welcome-overlay{position:fixed;inset:0;z-index:110;display:flex;align-items:flex-start;justify-content:flex-end;padding:22px;pointer-events:none;background:transparent;backdrop-filter:none;animation:none;}
+.welcome-panel{display:flex;align-items:center;gap:13px;width:min(390px,calc(100vw - 32px));padding:17px 19px;background:#fff;border:1px solid #d9d8d2;border-left:2px solid #242422;text-align:left;box-shadow:0 8px 28px rgba(0,0,0,.08);animation:welcomeRise .24s ease-out;}
+.welcome-mark{flex:0 0 25px;width:25px;height:25px;margin:0;background:#f1f0eb;color:#282824;font-size:12px;}
+.welcome-panel strong{display:block;font-size:13px;font-weight:500;letter-spacing:-.02em;line-height:1.65;color:#222;}
+.welcome-panel span:last-child{display:block;margin-top:2px;font-size:11px;font-weight:400;color:#777;line-height:1.5;}
+@keyframes welcomeRise{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:560px){.welcome-overlay{padding:12px}.welcome-panel{width:calc(100vw - 24px);padding:14px 15px}}
+
+
+.admin-main #sf #scode::placeholder,.admin-main #sf #sbirth::placeholder{font-family:inherit;font-size:12px;font-weight:400;letter-spacing:0;color:#85847f;}
+</style>
+</head>
+<body>
+<div id="logoutOverlay" class="logout-overlay hidden" role="status" aria-live="polite"><div class="logout-panel"><div class="logout-spinner"></div><strong>로그아웃 중</strong><span>안전하게 세션을 종료하고 있습니다.</span></div></div>
+<div id="adminWelcome" class="welcome-overlay hidden" role="status" aria-live="polite"><div class="welcome-panel"><span class="welcome-mark">✓</span><div><strong id="adminWelcomeTitle"></strong><span id="adminWelcomeSub">관리자 인증이 완료되었습니다.</span></div></div></div>
+<div id="studentApp" class="shell">
+  <main class="login" id="loginView">
+    <p class="login-kicker">CHEONGUN HAKSA <span>/</span> ACTUAL CHALLENGE</p>
+    <h1>모의고사 성적 조회</h1>
+    <p class="login-intro">개인식별코드와 생년월일을 입력해 주세요.</p>
+    <form id="lookupForm">
+      <div class="field"><label for="studentCode">개인식별코드</label><input id="studentCode" maxlength="6" autocomplete="off" autocapitalize="characters" placeholder="영문 및 숫자 6자리" required></div>
+      <div class="field"><label for="birthdate">생년월일</label><input id="birthdate" inputmode="numeric" maxlength="8" pattern="[0-9]{8}" autocomplete="off" placeholder="YYYYMMDD" required></div>
+      <button class="btn primary lookup-btn" id="lookupButton">확인하기</button>
+    </form>
+    <p id="message" class="message" role="status" aria-live="polite"></p>
+    <div class="login-foot"><span>청운학사</span><span>MOCK EXAM RESULTS</span></div>
+  </main>
+  <main id="studentResultsView" class="result-view hidden">
+    <header class="result-head"><div><div class="eyebrow">CHEONGUN HAKSA / ACTUAL CHALLENGE</div><h1>모의고사 성적표</h1><p class="muted">응시한 시험을 선택해 성적을 확인할 수 있습니다.</p></div><div class="actions"><button class="btn" id="studentLogout">로그아웃</button></div></header>
+    <section class="exam-picker"><label for="resultExamSelect">시험 선택</label><select id="resultExamSelect"></select></section>
+    <div class="result-meta" id="resultMeta"></div><section class="result-summary" id="resultSummary"></section>
+    <section class="result-section"><div class="section-head"><h2>과목별 성적</h2></div><div id="scoreList"></div></section>
+    <section class="result-section"><div class="section-head"><h2>등급 기준 점수</h2></div><div id="cutoffList" class="cutoff-table-wrap"></div></section>
+  </main>
+</div>
+<div id="adminApp" class="admin hidden"><div class="admin-wrap"><header class="admin-head"><div><div class="eyebrow">CHEONGUN HAKSA / ADMIN</div><h1>모의고사 성적 관리</h1></div></header><div class="admin-grid"><nav class="card nav"><button data-view="students">학생 관리</button><button data-view="scores">성적 관리</button><button data-view="bulk">일괄 입력</button><button data-view="cutoffs">등급 기준 관리</button><button data-view="preview">학생 성적 조회</button><button id="adminLogout" class="nav-logout">로그아웃</button></nav><main class="card admin-main"><div id="adminContent"></div><p id="adminMessage" class="admin-msg toast" role="status" aria-live="polite"></p></main></div></div></div>
+<script>
+const SUPABASE_URL="https://gcajxrcyitsslwulyvjr.supabase.co";
+// Supabase Dashboard > Project Settings > API Keys에서 Publishable key를 입력하세요.
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_s7TGFo4YRC6JqeQPnOVfhQ_JPlIPtxG";
+const ADMIN_URL=SUPABASE_URL+"/functions/v1/admin-assignment";
+const $=id=>document.getElementById(id);let adminToken="";
+const admin=$("adminApp"),content=$("adminContent"),adminMsg=$("adminMessage");let students=[],scores=[],cutoffs=[];
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
+let toastTimer;function say(message,type=""){clearTimeout(toastTimer);adminMsg.textContent=message||"";adminMsg.className="admin-msg toast"+(type?" "+type:"");if(message){requestAnimationFrame(()=>adminMsg.classList.add("show"));toastTimer=setTimeout(()=>{adminMsg.classList.remove("show");setTimeout(()=>{if(!adminMsg.classList.contains("show"))adminMsg.textContent=""},220)},3600)}}
+function showLogin(){$("loginView").classList.remove("hidden");$("studentResultsView").classList.add("hidden");$("studentCode").value="";$("birthdate").value="";$("message").textContent="";$("message").className="message";$("studentCode").focus()}
+$("studentLogout").onclick=()=>logoutWithNotice(showLogin);
+$("lookupForm").addEventListener("submit",async e=>{
+ e.preventDefault();const code=$("studentCode").value.trim().toUpperCase(),birth=$("birthdate").value.trim(),msg=$("message");msg.className="message";msg.textContent="";
+ if(!/^[A-Z0-9]{6}$/.test(code)){msg.textContent="코드는 영문 및 숫자 6자리로 입력해 주세요.";msg.classList.add("error");return}
+ if(!/^\d{8}$/.test(birth)){msg.textContent="생년월일은 숫자 8자리로 입력해 주세요.";msg.classList.add("error");return}
+ $("lookupButton").disabled=true;msg.innerHTML='확인 중<span class="loading-dots" aria-label="진행 중"><i>.</i><i>.</i><i>.</i></span>';
+ try{
+   if(!SUPABASE_PUBLISHABLE_KEY||SUPABASE_PUBLISHABLE_KEY.includes("PASTE_YOUR"))throw Error("Supabase Publishable Key를 index.html에 설정해 주세요.");
+   if(code.startsWith("M")){
+     const r=await fetch(ADMIN_URL,{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify({action:"lookup_student",student_code:code,birthdate:birth})});
+     const d=await r.json().catch(()=>({}));if(!r.ok)throw Error(d.error||"개인식별코드 또는 생년월일을 확인해 주세요.");renderStudentResults(d);return;
+   }
+   const r=await fetch(ADMIN_URL,{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify({action:"admin_login",admin_code:code,birthdate:birth})});
+   const d=await r.json().catch(()=>({}));if(r.status===429)throw Error(d.error||"인증 시도가 많습니다. 잠시 후 다시 시도해 주세요.");if(!r.ok||!d.token)throw Error(d.error||"개인식별코드 또는 생년월일이 올바르지 않습니다.");
+   adminToken=d.token;showAdminWelcome(d,code);$("studentApp").classList.add("hidden");admin.classList.remove("hidden");await render("students");
+ }catch(err){msg.textContent=err.message||"확인에 실패했습니다. 잠시 후 다시 시도해 주세요.";msg.classList.add("error");}
+ finally{$("lookupButton").disabled=false;}
+});
+let welcomeTimer;function showAdminWelcome(data,code){clearTimeout(welcomeTimer);const name=String(data.admin_name||data.adminName||data.display_name||data.name||data.admin?.display_name||data.admin?.name||data.profile?.name||data.user?.name||"").trim();if(!name)return;const title=$("adminWelcomeTitle");title.textContent=`${name}님, 로그인이 완료되었습니다.`;const overlay=$("adminWelcome");overlay.classList.remove("hidden");welcomeTimer=setTimeout(()=>overlay.classList.add("hidden"),4800)}
+function resultParts(value){const raw=String(value||"");let m=raw.match(/^(\d{4})학년도\s+(.+?)\s+\(응시일 (\d{4}-\d{2}-\d{2})\)\s+(?:\/|·)\s+(.+)$/);if(m)return {exam:`${m[1]}학년도 ${m[2]} (응시일 ${m[3]})`,year:m[1],event:m[2],date:m[3],subject:m[4]};m=raw.match(/^(\d{4})학년도\s+(.+?)\s+(?:\/|·)\s+(.+)$/);if(!m)return {exam:"기타 시험",year:"",event:"기타 시험",date:"",subject:raw};return {exam:`${m[1]}학년도 ${m[2]}`,year:m[1],event:m[2],date:"",subject:m[3]}}
+let activeResultData=null;
+function renderStudentResults(data){activeResultData=data;$("loginView").classList.add("hidden");$("studentResultsView").classList.remove("hidden");$("message").textContent="";renderReportData(data,$("studentCode").value.trim().toUpperCase(),{select:"resultExamSelect",meta:"resultMeta",summary:"resultSummary",scores:"scoreList",cutoffs:"cutoffList"})}
+function renderReportData(data,studentCode,ids){const groups=new Map();(data.scores||[]).forEach(x=>{const p=resultParts(x.subject);if(!groups.has(p.exam))groups.set(p.exam,[]);groups.get(p.exam).push({...x,_parts:p})});const exams=[...groups.keys()].sort((a,b)=>b.localeCompare(a,"ko",{numeric:true}));const sel=$(ids.select);sel.innerHTML=exams.map(e=>`<option value="${esc(e)}">${esc(e)}</option>`).join("");const rankLabel=x=>x.rank!==null&&x.rank!==undefined&&x.rank!==""&&x.participant_count!==null&&x.participant_count!==undefined&&x.participant_count!==""?`${fmt(x.rank)} / ${fmt(x.participant_count)}`:"—";const paint=()=>{const selected=sel.value;const valid=(groups.get(selected)||[]).filter(x=>Number.isFinite(Number(x.score)));const dateMatch=selected.match(/응시일 (\d{4}-\d{2}-\d{2})/);$(ids.meta).innerHTML=`<div><span>응시 일자</span><strong>${esc(dateMatch?dateMatch[1]:"미등록")}</strong></div><div><span>개인식별코드</span><strong>${esc(studentCode)}</strong></div>`;const avg=valid.length?valid.reduce((a,x)=>a+Number(x.score),0)/valid.length:null;const ranks=valid.filter(x=>x.rank!==null&&x.rank!==undefined&&x.rank!==""&&x.participant_count!==null&&x.participant_count!==undefined&&x.participant_count!=="");$(ids.summary).innerHTML=`<div class="summary-item"><div class="summary-label">등록 과목 평균</div><div class="summary-value">${avg===null?"—":avg.toFixed(1)}<span class="summary-unit">점</span></div></div>`;if(!valid.length){$(ids.scores).innerHTML='<div class="empty">선택한 시험의 성적이 아직 등록되지 않았습니다.</div>';$(ids.cutoffs).innerHTML='<div class="empty">등록된 등급 기준 점수가 없습니다.</div>';return}$(ids.scores).innerHTML=`<div class="tablewrap report-score-wrap"><table class="table score-table report-score-table"><thead><tr><th>영역</th><th>원점수</th><th>과목 평균</th><th>석차</th><th>응시자 수</th><th>등급</th></tr></thead><tbody>${valid.map(x=>`<tr><td><strong>${esc(x._parts.subject)}</strong></td><td>${fmt(x.score)}점</td><td>${x.average===null||x.average===undefined?"—":fmt(Number(x.average))+"점"}</td><td>${x.rank===null||x.rank===undefined||x.rank===""?"—":fmt(x.rank)+"등"}</td><td>${x.participant_count===null||x.participant_count===undefined||x.participant_count===""?"—":fmt(x.participant_count)+"명"}</td><td>${x.grade?esc(x.grade)+"등급":"—"}</td></tr>`).join("")}</tbody></table></div>`;const cutMap=new Map();valid.flatMap(x=>(x.cutoffs||[]).map(c=>({...c,subject:x._parts.subject}))).forEach(c=>{const k=c.subject+"|"+c.grade;if(!cutMap.has(k))cutMap.set(k,c)});const bySubject=new Map();[...cutMap.values()].sort((a,b)=>a.subject.localeCompare(b.subject,"ko")||Number(a.grade)-Number(b.grade)).forEach(c=>{if(!bySubject.has(c.subject))bySubject.set(c.subject,[]);bySubject.get(c.subject).push(c)});$(ids.cutoffs).innerHTML=bySubject.size?`<div class="cutoff-grid">${[...bySubject].map(([subject,cs])=>`<div class="cutoff-item"><div class="cutoff-title">${esc(subject)}</div>${cs.map(c=>`<div class="cutoff-line"><span>${esc(c.grade)}등급</span><strong>${fmt(c.min_score)}점</strong></div>`).join("")}</div>`).join("")}</div>`:'<div class="empty">선택한 시험의 등급 기준 점수가 등록되지 않았습니다.</div>'};sel.onchange=paint;if(exams.length)paint();else{sel.innerHTML='<option value="">등록된 시험 없음</option>';$(ids.meta).innerHTML=`<div><span>응시 일자</span><strong>미등록</strong></div><div><span>개인식별코드</span><strong>${esc(studentCode)}</strong></div>`;$(ids.summary).innerHTML="";$(ids.scores).innerHTML='<div class="empty">등록된 성적이 없습니다.</div>';$(ids.cutoffs).innerHTML='<div class="empty">등록된 등급 기준 점수가 없습니다.</div>'}}
+function fmt(v){const n=Number(v);return Number.isFinite(n)?n.toLocaleString("ko-KR",{maximumFractionDigits:2}):"—"}
+function endAdminSession(){adminToken="";admin.classList.add("hidden");$("studentApp").classList.remove("hidden");showLogin()}
+function logoutWithNotice(done){const overlay=$("logoutOverlay");overlay.classList.remove("hidden");setTimeout(()=>{overlay.classList.add("hidden");done()},650)}
+document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>{if(welcomeTimer){clearTimeout(welcomeTimer);$("adminWelcome").classList.add("hidden")}if(toastTimer){clearTimeout(toastTimer);adminMsg.classList.remove("show");adminMsg.textContent=""}render(b.dataset.view)});$("adminLogout").onclick=()=>logoutWithNotice(endAdminSession);
+async function call(action,payload={}){if(!adminToken)throw Error("관리자 인증이 만료되었습니다. 다시 인증해 주세요.");const r=await fetch(ADMIN_URL,{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_PUBLISHABLE_KEY,"Authorization":"Bearer "+adminToken},body:JSON.stringify({action,...payload})});const d=await r.json().catch(()=>({error:"서버 응답 오류"}));if(r.status===401){endAdminSession();throw Error(d.error||"관리자 인증이 만료되었습니다.")}if(!r.ok)throw Error(d.error||"요청 실패");return d}
+async function render(view){document.querySelectorAll("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===view));content.innerHTML='<p class="loading-line"><span>불러오는 중</span><i></i><i></i><i></i></p>';try{const d=await call("dashboard");students=d.students||[];scores=d.scores||[];cutoffs=d.cutoffs||[];if(view==="dashboard")view="students";if(view==="students")studentView();if(view==="scores")scoreView();if(view==="bulk")bulkView();if(view==="cutoffs")cutoffView();if(view==="preview")previewView()}catch(e){content.innerHTML='<div class="notice">관리 데이터를 불러오지 못했습니다.<br>'+esc(e.message)+'</div>'}}
+const examOptions=["3월 전국연합학력평가","5월 전국연합학력평가","6월 대학수학능력시험 모의평가","7월 전국연합학력평가","9월 대학수학능력시험 모의평가","10월 전국연합학력평가","11월 대학수학능력시험"];
+const areaOptions=["국어 영역","수학 영역","사회탐구 영역","과학탐구 영역"];
+function examLabel(year,event,date){return `${year}학년도 ${event} (응시일 ${date})`}
+function composeSubject(year,event,date,area){const y=String(year||"").trim(),e=String(event||"").trim(),d=String(date||"").trim(),a=String(area||"").trim();if(!y||!e||!d||!a)throw Error("학년도, 시험, 응시 일자, 영역을 모두 입력해 주세요.");return `${examLabel(y,e,d)} / ${a}`}
+function parseSubject(value){const raw=String(value||"");const m=raw.match(/^(\d{4})학년도\s+(.+?)\s+(?:\/|·)\s+(.+)$/);return m?{year:m[1],type:m[2],subject:m[3]}:{year:"",type:"기타 시험",subject:raw}}
+function examFields(prefix,cutoffOnly=false){const years=[2025,2026],areas=cutoffOnly?["국어 영역","수학 영역"]:areaOptions;return `<div class="field"><label for="${prefix}Year">학년도</label><select id="${prefix}Year" required><option value="">학년도 선택</option>${years.map(y=>`<option value="${y}">${y}학년도</option>`).join("")}</select></div><div class="field"><label for="${prefix}SchoolGrade">학년</label><select id="${prefix}SchoolGrade" required><option value="">학년 선택</option>${[1,2,3].map(y=>`<option value="${y}">고등학교 ${y}학년</option>`).join("")}</select></div><div class="field"><label for="${prefix}Type">시험 종류</label><select id="${prefix}Type" required><option value="">시험 선택</option>${examOptions.map(x=>`<option>${x}</option>`).join("")}</select></div><div class="field"><label for="${prefix}Date">응시 일자</label><input id="${prefix}Date" type="date" required></div><div class="field"><label for="${prefix}Area">영역</label><select id="${prefix}Area" required><option value="">영역 선택</option>${areas.map(x=>`<option>${x}</option>`).join("")}</select></div>`}
+function fullSubject(prefix){const grade=$(prefix+"SchoolGrade")?.value||"";const area=$(prefix+"Area").value;if(!grade||!area)throw Error("학년과 영역을 모두 선택해 주세요.");return `고${grade} · ${area}`}
+function dashboard(){render("students")}
+function studentView(){content.innerHTML=`<div class="admin-title"><h2>학생 관리</h2></div><form id="sf" class="formbox"><input id="sid" type="hidden"><div class="grid2"><div class="field"><label for="scode">개인식별코드</label><input id="scode" required maxlength="6" pattern="[Mm][A-Za-z0-9]{5}" placeholder="MXXXXX" autocomplete="off"></div><div class="field"><label for="sbirth">생년월일</label><input id="sbirth" required maxlength="8" pattern="[0-9]{8}" inputmode="numeric" placeholder="YYYYMMDD"></div></div><div class="actions"><button class="btn primary" id="sSubmit">학생 등록</button><button type="button" class="btn quiet hidden" id="sCancel">등록 취소</button></div></form><div class="search"><input id="sq" placeholder="개인식별코드 검색" aria-label="개인식별코드 검색"></div><div id="st"></div>`;const draw=()=>{let a=students.filter(s=>s.student_code.toUpperCase().includes($("sq").value.trim().toUpperCase())).sort((x,y)=>x.student_code.localeCompare(y.student_code));$("st").innerHTML=a.length?`<div class="tablewrap"><table class="table"><thead><tr><th>개인식별코드</th><th>생년월일</th><th>관리</th></tr></thead><tbody>${a.map(s=>`<tr><td class="student-identity">${esc(s.student_code)}</td><td class="student-birthdate">${esc(s.birthdate)}</td><td><div class="row-actions"><button class="btn danger small" data-sd="${s.id}">삭제</button></div></td></tr>`).join("")}</tbody></table></div>`:'<div class="empty">학생 데이터가 없습니다.</div>'};draw();$("sq").oninput=draw;const cancel=()=>{$("sf").reset();$("sid").value="";$("sSubmit").textContent="학생 등록";$("sCancel").classList.add("hidden")};$("sCancel").onclick=cancel;$("sf").onsubmit=async e=>{e.preventDefault();const student_code=$("scode").value.trim().toUpperCase(),birthdate=$("sbirth").value.trim();if(students.some(s=>s.student_code===student_code&&String(s.id)!==$("sid").value)){if(!confirm(`개인식별코드 ${student_code}가 이미 등록되어 있습니다. 중복 등록을 계속할까요?`))return}try{await call("save_student",{student:{id:$("sid").value||null,student_code,birthdate}});say("학생 정보를 등록했습니다.","success");const q=$("sq").value;await render("students");$("sq").value=q;$("sq").dispatchEvent(new Event("input"))}catch(e){say(e.message,"error")}};$("st").onclick=async e=>{let d=e.target.closest("[data-sd]");if(d){let st=students.find(x=>String(x.id)===d.dataset.sd);if(confirm(`${st.student_code} 학생과 연결된 성적도 함께 삭제될 수 있습니다. 삭제할까요?`))try{await call("delete_student",{id:st.id});say("학생 정보를 삭제했습니다.","success");await render("students")}catch(e){say(e.message,"error")}}}}
+function scoreView(){content.innerHTML=`<div class="admin-title"><h2>성적 관리</h2></div><form id="cf" class="formbox"><input id="cid" type="hidden"><div class="grid2"><div class="field"><label for="cstudent">개인식별코드</label><select id="cstudent" required><option value="">개인식별코드 선택</option>${students.slice().sort((a,b)=>a.student_code.localeCompare(b.student_code)).map(st=>`<option value="${st.id}">${esc(st.student_code)}</option>`).join("")}</select></div>${examFields("c")}<div class="field"><label for="cscore">원점수</label><input id="cscore" type="number" min="0" max="100" step=".01" required></div></div><div class="actions"><button class="btn primary">성적 등록</button><button type="button" class="btn quiet hidden" id="cCancel">입력 취소</button></div></form><div class="search"><input id="cq" placeholder="개인식별코드 또는 시험 검색" aria-label="성적 검색"></div><div id="ct"></div>`;const draw=()=>{let q=$("cq").value.toLowerCase(),a=scores.filter(sc=>(students.find(st=>st.id===sc.student_id)?.student_code+" "+sc.subject).toLowerCase().includes(q)).sort((x,y)=>(students.find(st=>st.id===x.student_id)?.student_code||"").localeCompare(students.find(st=>st.id===y.student_id)?.student_code||"")||x.subject.localeCompare(y.subject,"ko"));$("ct").innerHTML=a.length?`<div class="tablewrap"><table class="table"><thead><tr><th>개인식별코드</th><th>시험 및 과목</th><th>원점수</th><th>관리</th></tr></thead><tbody>${a.map(sc=>`<tr><td class="record-code">${esc(students.find(st=>st.id===sc.student_id)?.student_code)}</td><td class="record-exam">${esc(String(sc.subject).replaceAll(" · "," / "))}</td><td>${fmt(sc.score)}점</td><td><div class="row-actions"><button class="btn danger small" data-cd="${sc.id}">삭제</button></div></td></tr>`).join("")}</tbody></table></div>`:'<div class="empty">등록된 성적이 없습니다.</div>'};draw();$("cq").oninput=draw;const cancel=()=>{$("cf").reset();$("cid").value="";$("cCancel").classList.add("hidden")};$("cCancel").onclick=cancel;$("cf").onsubmit=async e=>{e.preventDefault();const studentId=$("cstudent").value,subject=composeSubject($("cYear").value,$("cType").value,$("cDate").value,fullSubject("c")),score=Number($("cscore").value);const duplicate=scores.find(sc=>sc.student_id===studentId&&sc.subject===subject&&String(sc.id)!==$("cid").value);if(duplicate&&!confirm(`동일한 학생, 시험, 과목의 성적이 이미 있습니다. 기존 항목과 별개로 저장할까요?`))return;try{await call("save_score",{score:{id:$("cid").value||null,student_id:studentId,subject,score}});say("성적을 등록했습니다.","success");const chosen={studentId,year:$("cYear").value,type:$("cType").value,date:$("cDate").value,area:$("cArea").value,score:$("cscore").value,q:$("cq").value};await render("scores");$("cstudent").value=chosen.studentId;$("cYear").value=chosen.year;$("cType").value=chosen.type;$("cDate").value=chosen.date;$("cArea").value=chosen.area;$("cscore").value=chosen.score;$("cq").value=chosen.q;$("cq").dispatchEvent(new Event("input"))}catch(e){say(e.message,"error")}};$("ct").onclick=async e=>{const d=e.target.closest("[data-cd]");if(!d)return;const sc=scores.find(x=>String(x.id)===d.dataset.cd);if(!confirm(`${sc.subject} 성적을 삭제할까요?`))return;try{await call("delete_score",{id:sc.id});say("성적을 삭제했습니다.","success");await render("scores")}catch(e){say(e.message,"error")}}}
+function cutoffView(){content.innerHTML=`<div class="admin-title"><h2>등급 기준 관리</h2></div><form id="cutForm" class="formbox"><div class="grid2">${examFields("cut",true)}<div class="field"><label for="cutGrade">등급</label><select id="cutGrade" required>${[1,2,3,4,5,6,7,8].map(n=>`<option value="${n}">${n}등급</option>`).join("")}</select></div><div class="field"><label for="cutScore">기준 점수</label><input id="cutScore" type="number" min="0" max="100" step=".01" required></div></div><div class="actions"><button class="btn primary">기준 점수 등록</button></div></form><div class="search"><input id="cutSearch" placeholder="학년도, 시험 또는 과목 검색" aria-label="등급 기준 검색"></div><div id="cutTable"></div>`;const draw=()=>{const q=$("cutSearch").value.toLowerCase();const list=cutoffs.filter(c=>c.subject.toLowerCase().includes(q)).sort((a,b)=>a.subject.localeCompare(b.subject,"ko")||Number(a.grade)-Number(b.grade));$("cutTable").innerHTML=list.length?`<div class="tablewrap"><table class="table"><thead><tr><th>시험 및 과목</th><th>등급</th><th>기준 점수</th><th></th></tr></thead><tbody>${list.map(c=>`<tr><td class="record-exam">${esc(String(c.subject).replaceAll(" · "," / "))}</td><td>${c.grade}등급</td><td>${fmt(c.min_score)}점</td><td><div class="row-actions"><button class="btn small cutoff-edit" data-cutedit="${c.id}">수정</button><button class="btn danger small" data-cutdel="${c.id}">삭제</button></div></td></tr>`).join("")}</tbody></table></div>`:'<div class="empty">조건에 맞는 기준 점수가 없습니다.</div>'};draw();$("cutSearch").oninput=draw;const defaultCutoffScores={1:40,2:35,3:30,4:25,5:20,6:15,7:10,8:5};$("cutScore").value=defaultCutoffScores[$("cutGrade").value]??40;$("cutGrade").onchange=()=>{$("cutScore").value=defaultCutoffScores[$("cutGrade").value]??""};$("cutForm").onsubmit=async e=>{e.preventDefault();const subject=composeSubject($("cutYear").value,$("cutType").value,$("cutDate").value,fullSubject("cut")),grade=Number($("cutGrade").value),min_score=Number($("cutScore").value);const duplicate=cutoffs.find(c=>c.subject===subject&&Number(c.grade)===grade);if(duplicate&&!confirm(`같은 시험, 과목, 등급의 기준 점수가 이미 등록되어 있습니다. 중복 등록을 계속할까요?`))return;try{await call("save_cutoff",{subject,grade,min_score});const q=$("cutSearch").value;const d=await call("dashboard");cutoffs=d.cutoffs||[];draw();$("cutSearch").value=q;$("cutSearch").dispatchEvent(new Event("input"));say("등급 기준 점수를 등록했습니다.","success")}catch(e){say(e.message,"error")}};$("cutTable").onclick=async e=>{const edit=e.target.closest("[data-cutedit]");if(edit){const c=cutoffs.find(x=>String(x.id)===edit.dataset.cutedit);if(!c)return;const raw=String(c.subject||"");const m=raw.match(/^(\d{4})학년도\s+(.+?)\s+\(응시일 (\d{4}-\d{2}-\d{2})\)\s*\/\s*(?:고([123])\s*·\s*)?(.+)$/);if(!m){say("이 기준의 시험 정보 형식을 확인할 수 없습니다. 기존 기준은 삭제하지 말고, 새 기준을 등록해 주세요.","error");return}$("cutYear").value=m[1];$("cutType").value=m[2];$("cutDate").value=m[3];$("cutGrade").value=String(c.grade);$("cutScore").value=String(c.min_score);const level=m[4]||"";if(level)$("cutSchoolGrade").value=level;if(["국어 영역","수학 영역"].includes(m[5]))$("cutArea").value=m[5];$("cutForm").scrollIntoView({behavior:"smooth",block:"start"});say("수정할 기준을 위 입력란에 불러왔습니다. 기준 점수 등록을 누르면 해당 시험·과목·등급 기준이 갱신됩니다.","success");return}const b=e.target.closest("[data-cutdel]");if(!b)return;if(!confirm("이 기준 점수를 삭제할까요?"))return;try{await call("delete_cutoff",{id:b.dataset.cutdel});cutoffs=cutoffs.filter(x=>String(x.id)!==b.dataset.cutdel);draw();say("등급 기준 점수를 삭제했습니다.","success")}catch(e){say(e.message,"error")}}}
+function previewView(){content.innerHTML=`<div class="admin-title"><h2>학생 성적 조회</h2><p class="muted">개인식별코드를 선택해 해당 학생의 성적표를 조회할 수 있습니다.</p></div><div class="formbox"><div class="field"><label for="previewStudent">개인식별코드</label><select id="previewStudent"><option value="">개인식별코드 선택</option>${students.slice().sort((a,b)=>a.student_code.localeCompare(b.student_code)).map(st=>`<option value="${st.id}">${esc(st.student_code)}</option>`).join("")}</select></div><button class="btn primary" id="openPreview">성적표 조회</button></div><div id="previewArea"></div>`;$("openPreview").onclick=async()=>{const st=students.find(x=>String(x.id)===$("previewStudent").value);if(!st){say("학생을 선택해 주세요.","error");return}try{const r=await fetch(ADMIN_URL,{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify({action:"lookup_student",student_code:st.student_code,birthdate:st.birthdate})});const d=await r.json().catch(()=>({}));if(!r.ok)throw Error(d.error||"학생 성적표를 불러오지 못했습니다.");$("previewArea").innerHTML=`<div class="preview-frame"><div class="preview-label">학생 성적표 미리보기</div><header class="result-head"><div><div class="eyebrow">CHEONGUN HAKSA / ACTUAL CHALLENGE</div><h1>모의고사 성적표</h1><p class="muted">응시한 시험을 선택해 성적을 확인할 수 있습니다.</p></div></header><section class="exam-picker"><label for="previewExamSelect">시험 선택</label><select id="previewExamSelect"></select></section><div class="result-meta" id="previewMeta"></div><section class="result-summary" id="previewSummary"></section><section class="result-section"><div class="section-head"><h2>과목별 성적</h2></div><div id="previewScores"></div></section><section class="result-section"><div class="section-head"><h2>등급 기준 점수</h2></div><div id="previewCutoffs" class="cutoff-table-wrap"></div></section></div>`;renderReportData(d,st.student_code,{select:"previewExamSelect",meta:"previewMeta",summary:"previewSummary",scores:"previewScores",cutoffs:"previewCutoffs"});say("학생 성적표를 불러왔습니다.","success")}catch(e){say(e.message,"error")}}}
+function bulkView(){content.innerHTML=`<div class="admin-title"><h2>성적 일괄 등록</h2></div><form id="bf" class="formbox"><div class="field"><label for="bdata">성적 데이터</label><p class="field-note">입력 항목: 개인식별코드, 생년월일, 학년도, 시험명, 응시 일자, 영역, 원점수</p><p class="field-note">입력 예시: MXXXXX, YYYYMMDD, 2025, 3월, YYYY-MM-DD, 국어 영역, 100</p><textarea id="bdata" rows="7" required aria-label="성적 데이터"></textarea></div><div class="actions"><button class="btn primary" id="bulkSubmit">성적 일괄 등록</button></div></form>`;const form=$("bf");form.onsubmit=async e=>{e.preventDefault();const submit=$("bulkSubmit");if(submit.disabled)return;const lines=$("bdata").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);const records=[],duplicates=[];const studentMap=new Map(students.map(st=>[String(st.student_code||"").toUpperCase(),st]));const scoreKeys=new Set(scores.map(sc=>`${sc.student_id}|${sc.subject}`));const aliases={"3월":"3월 전국연합학력평가","5월":"5월 전국연합학력평가","6월":"6월 대학수학능력시험 모의평가","7월":"7월 전국연합학력평가","9월":"9월 대학수학능력시험 모의평가","10월":"10월 전국연합학력평가","11월":"11월 대학수학능력시험"};const seen=new Set();for(let i=0;i<lines.length;i++){const c=(lines[i].includes("\t")?lines[i].split("\t"):lines[i].split(",")).map(x=>x.trim().replace(/^"|"$/g,""));if(i===0&&/student.?code|식별코드|개인식별코드/i.test(c[0]||""))continue;const month=(c[3]||"").replace(/\s+/g,"");const exam=aliases[month]||c[3];if(c.length<7||!/^[Mm][A-Za-z0-9]{5}$/.test(c[0]||"")||!/^[0-9]{8}$/.test(c[1]||"")||!/^202[56]$/.test(c[2]||"")||!examOptions.includes(exam)||!/^\d{4}-\d{2}-\d{2}$/.test(c[4]||"")||!areaOptions.includes(c[5])||!Number.isFinite(Number(c[6]))||Number(c[6])<0||Number(c[6])>100)continue;const subject=composeSubject(c[2],exam,c[4],c[5]);const student=studentMap.get(c[0].toUpperCase());if(!student){duplicates.push({line:i+1,reason:`${c[0]} 학생이 등록되어 있지 않습니다.`});continue}const key=`${student.id}|${subject}`;if(scoreKeys.has(key)||seen.has(key))duplicates.push({line:i+1,reason:`${c[0]} / ${subject} 성적이 이미 등록되어 있습니다.`});seen.add(key);records.push({student_code:c[0].toUpperCase(),birthdate:c[1],subject,score:Number(c[6])})}if(!records.length){say("등록할 수 있는 성적 데이터가 없습니다.","error");return}if(duplicates.length&&!confirm(`${duplicates.length}건의 중복 또는 확인 항목이 있습니다. 계속 진행할까요?\n\n${duplicates.slice(0,8).map(x=>`행 ${x.line}: ${x.reason}`).join("\n")}${duplicates.length>8?"\n외 추가 항목":""}`))return;submit.disabled=true;const oldText=submit.textContent;submit.textContent="등록 중…";try{const d=await call("bulk_scores",{records});say(`원점수 ${d.saved}건을 등록했습니다.`,"success");}catch(err){say(err.message||"일괄 등록에 실패했습니다.","error")}finally{submit.disabled=false;submit.textContent=oldText}}}
+</script></body></html>
+
+<style>/* Refined cutoff actions */
+.admin-main #cutTable .row-actions{gap:6px;justify-content:flex-start}
+.admin-main #cutTable .btn.cutoff-edit{display:inline-flex;align-items:center;justify-content:center;min-width:58px;height:34px;min-height:34px;padding:0 12px;border:1px solid #b8b8b3;border-radius:0;background:#f7f7f5;color:#242424;font-size:12px;font-weight:600;letter-spacing:-.02em;transition:background .15s,border-color .15s,color .15s}
+.admin-main #cutTable .btn.cutoff-edit:hover{background:#eaeae6;border-color:#555;color:#111}
+.admin-main #cutTable .btn.danger.small{border-radius:0}
+</style>
